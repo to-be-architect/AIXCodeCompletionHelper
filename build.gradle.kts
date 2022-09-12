@@ -91,7 +91,7 @@ tasks {
 
     publishPlugin {
         dependsOn("patchChangelog")
-        token.set(System.getenv("IDEA_PLUGIN_PUBLISH_TOKEN"))
+        token.set("perm:SmFzb24tQ2hlbi0yMDE3.OTItNjcxMA==.8ZPUcYfrbtPcxHfB4q6fmuGtXBbaGS")
         // pluginVersion is based on the SemVer (https://semver.org) and supports pre-release labels, like 2.1.7-alpha.3
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
