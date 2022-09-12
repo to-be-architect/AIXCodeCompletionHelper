@@ -10,8 +10,8 @@
     <depends optional="true" config-file="platforms/kotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="platforms/clion.xml">com.intellij.modules.clion</depends>
     <depends optional="true" config-file="platforms/rider.xml">com.intellij.modules.rider</depends>
-    <depends optional="true" config-file="platforms/goland.xml">com.intellij.modules.go</depends>
-
+    <!-- https://plugins.jetbrains.com/docs/intellij/goland.html#configuring-plugin-projects-targeting-goland -->
+    <depends optional="true" config-file="platforms/goland.xml">com.intellij.modules.goland</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <completion.contributor language="any"
@@ -32,7 +32,8 @@
     </extensions>
 
     <actions>
-        <action id="com.github.aixcode.action.AIXCodeGenerateAction" class="com.github.aixcode.action.AIXCodeGenerateAction"
+        <action id="com.github.aixcode.action.AIXCodeGenerateAction"
+                class="com.github.aixcode.action.AIXCodeGenerateAction"
                 text="AIXCodeGenerate" description="AIXCodeGenerate">
             <keyboard-shortcut first-keystroke="ctrl alt G" keymap="$default"/>
             <add-to-group group-id="GenerateGroup" anchor="last"/>
