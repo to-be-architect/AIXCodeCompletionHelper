@@ -1,0 +1,35 @@
+<idea-plugin>
+  <version>0.0.1</version>
+  <change-notes>&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;&lt;li&gt;fix plugin with platform compatible&lt;/li&gt;&lt;li&gt;修复 插件与平台的部分补全调用冲突问题&lt;/li&gt;&lt;li&gt;fix some bugs&lt;/li&gt;&lt;li&gt;修复 推荐更新将 IDE至 2022.1 版本，可完美解决 kotlin、go、c/c++ 等语言的补全问题&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;&lt;li&gt;added wubi、shuangpin is coming soon&lt;/li&gt;&lt;li&gt;预增 加五笔、双拼等支持，后续陆续支持&lt;/li&gt;&lt;li&gt;improved performance&lt;/li&gt;&lt;li&gt;优化 插件性能优化&lt;/li&gt;&lt;li&gt;upgrade API version&lt;/li&gt;&lt;li&gt;依赖 API升级&lt;/li&gt;&lt;/ul&gt;</change-notes>
+  <description>&lt;p&gt;&lt;h3&gt;aiXCoder&lt;/h3&gt;&lt;/p&gt;</description>
+  <idea-version since-build="212" />
+  <id>ccom.github.aixcode.aixcodecompletionhelper</id>
+  <name>AIXCodeCompletionHelper</name>
+  <vendor url="https://github.com/Jason-Chen-2017" email="chenguangjian2019@gmail.com">tuchg</vendor>
+  <!-- Product and plugin compatibility requirements -->
+  <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.lang</depends>
+  <!--各平台依赖-->
+  <depends optional="true" config-file="platforms/kotlin.xml">org.jetbrains.kotlin</depends>
+  <depends optional="true" config-file="platforms/clion.xml">com.intellij.modules.clion</depends>
+  <depends optional="true" config-file="platforms/rider.xml">com.intellij.modules.rider</depends>
+  <depends optional="true" config-file="platforms/goland.xml">com.intellij.modules.go</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <completion.contributor language="any" order="first" implementationClass="com.github.aixcode.completion.contributors.AiXCodeCompletionContributor" />
+    <postStartupActivity implementation="com.github.aixcode.config.UpdateNotifyActivity" />
+    <applicationService serviceImplementation="com.github.aixcode.config.PluginSettingsState" />
+    <applicationConfigurable parentId="tools" instance="com.github.aixcode.config.PluginSettingsController" displayName="AIXCoder Completion Helper" />
+    <notificationGroup id="AIXCoder Completion Helper Notification Group" displayType="STICKY_BALLOON" />
+  </extensions>
+  <actions>
+    <action id="com.github.aixcode.action.AIXCodeGenerateAction" class="com.github.aixcode.action.AIXCodeGenerateAction" text="AIXCodeGenerate" description="AIXCodeGenerate">
+      <keyboard-shortcut first-keystroke="ctrl alt G" keymap="$default" />
+      <add-to-group group-id="GenerateGroup" anchor="last" />
+    </action>
+  </actions>
+</idea-plugin>

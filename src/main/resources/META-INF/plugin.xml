@@ -1,0 +1,41 @@
+<idea-plugin>
+    <id>ccom.github.aixcode.aixcodecompletionhelper</id>
+    <name>AIXCodeCompletionHelper</name>
+    <vendor url="https://github.com/Jason-Chen-2017" email="chenguangjian2019@gmail.com">tuchg</vendor>
+    <!-- Product and plugin compatibility requirements -->
+    <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <!--各平台依赖-->
+    <depends optional="true" config-file="platforms/kotlin.xml">org.jetbrains.kotlin</depends>
+    <depends optional="true" config-file="platforms/clion.xml">com.intellij.modules.clion</depends>
+    <depends optional="true" config-file="platforms/rider.xml">com.intellij.modules.rider</depends>
+    <depends optional="true" config-file="platforms/goland.xml">com.intellij.modules.go</depends>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="any"
+                                order="first"
+                                implementationClass="com.github.aixcode.completion.contributors.AiXCodeCompletionContributor"/>
+        <postStartupActivity
+                implementation="com.github.aixcode.config.UpdateNotifyActivity"/>
+
+        <applicationService
+                serviceImplementation="com.github.aixcode.config.PluginSettingsState"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.aixcode.config.PluginSettingsController"
+                displayName="AIXCoder Completion Helper"
+        />
+        <notificationGroup id="AIXCoder Completion Helper Notification Group" displayType="STICKY_BALLOON"/>
+
+    </extensions>
+
+    <actions>
+        <action id="com.github.aixcode.action.AIXCodeGenerateAction" class="com.github.aixcode.action.AIXCodeGenerateAction"
+                text="AIXCodeGenerate" description="AIXCodeGenerate">
+            <keyboard-shortcut first-keystroke="ctrl alt G" keymap="$default"/>
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
