@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>ccom.github.aixcode.aixcodecompletionhelper</id>
     <name>AIXCodeCompletionHelper</name>
-    <vendor url="https://github.com/Jason-Chen-2017" email="chenguangjian2019@gmail.com">tuchg</vendor>
+    <vendor url="https://github.com/Jason-Chen-2017" email="chenguangjian2019@gmail.com">AIXCode</vendor>
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
@@ -32,11 +32,21 @@
     </extensions>
 
     <actions>
+
+        <action id="com.github.aixcode.action.AIXCodeGenerateActionS"
+                class="com.github.aixcode.action.AIXCodeGenerateActionS"
+                text="AIXCodeS" description="AIXCodeS">
+            <keyboard-shortcut first-keystroke="ctrl shift y" keymap="$default"/>
+            <add-to-group group-id="CodeMenu" anchor="first"/>
+        </action>
+
         <action id="com.github.aixcode.action.AIXCodeGenerateAction"
                 class="com.github.aixcode.action.AIXCodeGenerateAction"
-                text="AIXCodeGenerate" description="AIXCodeGenerate">
-            <keyboard-shortcut first-keystroke="ctrl alt X" keymap="$default"/>
-            <add-to-group group-id="GenerateGroup" anchor="last"/>
+                text="AIXCode" description="AIXCode">
+            <keyboard-shortcut first-keystroke="ctrl shift x" keymap="$default"/>
+            <add-to-group group-id="CodeMenu" anchor="first"/>
         </action>
+
     </actions>
+
 </idea-plugin>

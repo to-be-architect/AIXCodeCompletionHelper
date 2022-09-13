@@ -8,8 +8,7 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiFile
 
-const val HOST="http://72f7b478.vip.cpolar.cn"
-class AIXCodeGenerateAction : AnAction("AIXCode") {
+class AIXCodeGenerateActionS : AnAction("AIXCodeS") {
 
     override fun actionPerformed(event: AnActionEvent) {
         val psiFile: PsiFile? = event.getData(LangDataKeys.PSI_FILE)
@@ -20,7 +19,7 @@ class AIXCodeGenerateAction : AnAction("AIXCode") {
                     val selectedText = editor.selectionModel.selectedText ?: ""
                     println("selectedText=${selectedText}")
                     // aixcoder api
-                    val aixcode = HttpUtil.post("${HOST}/aix1", mapOf("x" to selectedText))
+                    val aixcode = HttpUtil.post("${HOST}/aix2", mapOf("x" to selectedText))
                     println("aixcode=${aixcode}")
 
                     WriteCommandAction.runWriteCommandAction(
