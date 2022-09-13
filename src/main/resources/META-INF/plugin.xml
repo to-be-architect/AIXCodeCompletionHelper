@@ -35,7 +35,7 @@
         <action id="com.github.aixcode.action.AIXCodeGenerateAction"
                 class="com.github.aixcode.action.AIXCodeGenerateAction"
                 text="AIXCodeGenerate" description="AIXCodeGenerate">
-            <keyboard-shortcut first-keystroke="ctrl alt G" keymap="$default"/>
+            <keyboard-shortcut first-keystroke="ctrl alt X" keymap="$default"/>
             <add-to-group group-id="GenerateGroup" anchor="last"/>
         </action>
     </actions>
