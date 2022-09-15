@@ -33,13 +33,6 @@
 
     <actions>
 
-        <action id="com.github.aixcode.action.AIXCodeGenerateActionS"
-                class="com.github.aixcode.action.AIXCodeGenerateActionS"
-                text="AIXCodeS" description="AIXCodeS">
-            <keyboard-shortcut first-keystroke="ctrl shift y" keymap="$default"/>
-            <add-to-group group-id="CodeMenu" anchor="first"/>
-        </action>
-
         <action id="com.github.aixcode.action.AIXCodeGenerateAction"
                 class="com.github.aixcode.action.AIXCodeGenerateAction"
                 text="AIXCode" description="AIXCode">
