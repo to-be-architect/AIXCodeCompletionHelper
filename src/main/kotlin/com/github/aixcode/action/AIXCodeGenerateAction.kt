@@ -8,7 +8,7 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiFile
 
-//const val HOST="http://72f7b478.vip.cpolar.cn"
+//const val HOST="http://6b1b590d.r3.cpolar.top"
 const val HOST="http://127.0.0.1:9888"
 class AIXCodeGenerateAction : AnAction("AIXCode") {
 

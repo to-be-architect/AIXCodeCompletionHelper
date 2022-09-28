@@ -3,6 +3,7 @@ package com.github.aixcode.completion.contributors
 import com.github.aixcode.completion.CodePrefixMatcher
 import com.github.aixcode.completion.CodeTemplateLookupElement
 import com.github.aixcode.constant.codeMap
+import com.github.aixcode.utils.TextDistanceUtil
 import com.intellij.codeInsight.completion.*
 import com.intellij.codeInsight.lookup.LookupElement
 
@@ -26,7 +27,7 @@ open class AiXCodeCompletionContributor : CompletionContributor() {
         var code = ""
         // TODO 配置常用代码模板,然后使用 缩写关键词进行智能补全
         for (key in codeMap.keys) {
-            if (key.contains(prefix)) {
+            if (matches(prefix, key)) {
                 code = codeMap[key]!!
                 resultSet.addElement(
                     PrioritizedLookupElement.withPriority(
@@ -45,7 +46,7 @@ open class AiXCodeCompletionContributor : CompletionContributor() {
         }
 
         // 修复 输入单个字符无响应
-        // resultSet.restartCompletionWhenNothingMatches()
+        resultSet.restartCompletionWhenNothingMatches()
 
         super.fillCompletionVariants(parameters, result)
     }
@@ -57,3 +58,5 @@ open class AiXCodeCompletionContributor : CompletionContributor() {
             rs.passResult(wrap!!)
         }
 }
+
+private fun matches(prefix: String, key: String) = TextDistanceUtil.getSimilarity(prefix, key) > 0.5
