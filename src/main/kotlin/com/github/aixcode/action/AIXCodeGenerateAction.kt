@@ -29,7 +29,7 @@ class AIXCodeGenerateAction : AnAction("AIXCodeGenerate") {
                     println("aixcode=${aixcode}")
 
                     val code = ParsePromptResponse(aixcode)
-                    println("code=${aixcode}")
+                    println("code=${code}")
 
                     WriteCommandAction.runWriteCommandAction(
                         psiFile.project, "AIXCodeGenerate", "empty",
