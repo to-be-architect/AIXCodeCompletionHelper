@@ -105,9 +105,19 @@ import com.google.gson.Gson
 object ChatGPTUtil {
 
     val API = "https://api.openai.com/v1/completions"
-    val API_KEY = "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" // 确保将 YOUR_API_KEY 替换为您的 API 密钥。
+
+    // 查询 API_KEY 余额： https://chat.kejicode.cn/
+
+    // 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
+    // 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
+    // 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
+
+    // val OPEN_API_KEY = "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" // 确保将 YOUR_API_KEY 替换为您的 API 密钥。
+    val OPEN_API_KEY = System.getenv("OPEN_API_KEY") // 确保将 OPEN_API_KEY 替换为您的 API 密钥,并设置到系统环境变量中。
 
     fun GetAIXCode(prompt: String): String {
+        val OPEN_API_KEY = System.getenv("OPEN_API_KEY")
+
         var res = ""
 
         // -d 请求入参
@@ -119,7 +129,7 @@ object ChatGPTUtil {
 
         val (_, _, result) = API.httpPost()
             .appendHeader("Content-Type", "application/json")
-            .appendHeader("Authorization", "Bearer $API_KEY")
+            .appendHeader("Authorization", "Bearer $OPEN_API_KEY")
             .timeout(60 * 1000)
             .jsonBody(Gson().toJson(data).toString())
             .timeout(60 * 1000)
