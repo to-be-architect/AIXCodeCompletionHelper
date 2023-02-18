@@ -112,12 +112,10 @@ object ChatGPTUtil {
     // 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
     // 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
 
-    // val OPEN_API_KEY = "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" // 确保将 YOUR_API_KEY 替换为您的 API 密钥。
-    val OPEN_API_KEY = System.getenv("OPEN_API_KEY") // 确保将 OPEN_API_KEY 替换为您的 API 密钥,并设置到系统环境变量中。
+     val OPEN_API_KEY = "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" // 确保将 YOUR_API_KEY 替换为您的 API 密钥。
+    // val OPEN_API_KEY = System.getenv("OPEN_API_KEY") // 确保将 OPEN_API_KEY 替换为您的 API 密钥,并设置到系统环境变量中。
 
     fun GetAIXCode(prompt: String): String {
-        val OPEN_API_KEY = System.getenv("OPEN_API_KEY")
-
         var res = ""
 
         // -d 请求入参
@@ -126,6 +124,8 @@ object ChatGPTUtil {
         data["prompt"] = prompt
         data["temperature"] = 0
         data["max_tokens"] = 1000
+
+        println("OPEN_API_KEY=$OPEN_API_KEY")
 
         val (_, _, result) = API.httpPost()
             .appendHeader("Content-Type", "application/json")
@@ -189,4 +189,6 @@ ${text}
 fun main() {
     val aixcode = ChatGPTUtil.GetAIXCode("用 golang 实现bubble sort")
     println("aixcode=${aixcode}")
+
+//    println(System.getenv("OPEN_API_KEY"))
 }
