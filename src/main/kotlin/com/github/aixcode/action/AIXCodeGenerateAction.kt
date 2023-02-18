@@ -1,7 +1,6 @@
 package com.github.aixcode.action
 
-import com.github.aixcode.utils.HttpUtil
-import com.github.aixcode.utils.ParsePromptResponse
+import com.github.aixcode.utils.ChatGPTUtil
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
@@ -20,16 +19,10 @@ class AIXCodeGenerateAction : AnAction("AIXCodeGenerate") {
                     val selectedText = editor.selectionModel.selectedText ?: ""
                     println("selectedText=${selectedText}")
 
-                    // 内置语言:golang
-                    val newSelectedText = "Human:用golang实现${selectedText}代码\\nAI:"
+                    // 这地方可以定制：加一些内置语言的文本:golang
+                    val prompt = "${selectedText}"
 
-                    val aixcode = HttpUtil.post("https://api.forchange.cn/",
-                        mapOf("prompt" to newSelectedText)
-                    )
-                    println("aixcode=${aixcode}")
-
-                    val code = ParsePromptResponse(aixcode)
-                    println("code=${code}")
+                    val code = ChatGPTUtil.GetAIXCode(prompt)
 
                     WriteCommandAction.runWriteCommandAction(
                         psiFile.project, "AIXCodeGenerate", "empty",
