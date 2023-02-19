@@ -3,6 +3,7 @@ package com.github.aixcode.utils
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.Gson
+import java.io.File
 
 
 /**
@@ -121,7 +122,11 @@ import com.google.gson.Gson
  */
 
 val API = "https://api.openai.com/v1/completions"
-val OPENAI_API_KEY_ENV_NAME = "OPENAI_API_KEY"
+
+// 确保将 OPENAI_API_KEY 替换为您的 API 密钥,并在本机目录下面创建一个文件名为："OPENAI_API_KEY" 的文件，文件内容是你的 API_KEY
+val OPENAI_API_KEY = File("${System.getProperty("user.home")}/OPENAI_API_KEY")
+    .readText(Charsets.UTF_8)
+    .trim() // trim() 方法用于删除字符串的头尾空白符
 
 object ChatGPTUtil {
 
@@ -138,7 +143,6 @@ object ChatGPTUtil {
          * OpenAI may also automatically rotate any API key that we've found has leaked publicly.
          */
 
-        val OPENAI_API_KEY = System.getenv(OPENAI_API_KEY_ENV_NAME) // 确保将 OPENAI_API_KEY 替换为您的 API 密钥,并设置到系统环境变量中。
 
         var res = ""
 
@@ -214,9 +218,7 @@ ${text}
 }
 
 fun main() {
-//    val aixcode = ChatGPTUtil.GetAIXCode("用 golang 实现bubble sort")
-//    println("aixcode=${aixcode}")
-
-    val OPENAI_API_KEY = System.getenv(OPENAI_API_KEY_ENV_NAME)
     println(OPENAI_API_KEY)
+    val aixcode = ChatGPTUtil.GetAIXCode("用 golang 实现bubble sort")
+    println("aixcode=${aixcode}")
 }
