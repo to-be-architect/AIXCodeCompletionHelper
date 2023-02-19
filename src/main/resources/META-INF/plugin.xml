@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>ccom.github.aixcode.aixcodecompletionhelper</id>
     <name>AIXCodeCompletionHelper</name>
-    <vendor url="https://github.com/Jason-Chen-2017" email="chenguangjian2019@gmail.com">tuchg</vendor>
+    <vendor url="https://github.com/Jason-Chen-2017" email="chenguangjian2019@gmail.com">禅与计算机程序设计艺术</vendor>
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
