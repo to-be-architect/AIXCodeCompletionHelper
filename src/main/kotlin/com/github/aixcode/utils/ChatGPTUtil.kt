@@ -6,12 +6,30 @@ import com.google.gson.Gson
 
 
 /**
- * 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
- * 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
+ * Natural language to OpenAI API
+ *
+ * https://platform.openai.com/examples
+ * https://platform.openai.com/examples/default-openai-api
+ *
+ * import os
+ * import openai
+ *
+ * openai.api_key = os.getenv("OPENAI_API_KEY")
+ *
+ * response = openai.Completion.create(
+ *   model="code-davinci-002",
+ *   prompt="\"\"\"\nUtil exposes the following:\nutil.openai() -> authenticates & returns the openai module, which has the following functions:\nopenai.Completion.create(\n    prompt=\"<my prompt>\", # The prompt to start completing from\n    max_tokens=123, # The max number of tokens to generate\n    temperature=1.0 # A measure of randomness\n    echo=True, # Whether to return the prompt in addition to the generated completion\n)\n\"\"\"\nimport util\n\"\"\"\nCreate an OpenAI completion starting from the prompt \"Once upon an AI\", no more than 5 tokens. Does not include the prompt.\n\"\"\"\n",
+ *   temperature=0,
+ *   max_tokens=64,
+ *   top_p=1.0,
+ *   frequency_penalty=0.0,
+ *   presence_penalty=0.0,
+ *   stop=["\"\"\""]
+ * )
  *
  * curl https://api.openai.com/v1/completions \
  * -H "Content-Type: application/json" \
- * -H "Authorization: Bearer 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" \
+ * -H "Authorization: Bearer sk-***********************************Ba" \
  * -d '{"model": "text-davinci-003", "prompt": "使用golang实现冒泡排序算法", "temperature": 0, "max_tokens": 1000}'
  *
  *
@@ -21,7 +39,7 @@ import com.google.gson.Gson
 /**
  * curl https://api.openai.com/v1/completions \
  * -H "Content-Type: application/json" \
- * -H "Authorization: Bearer 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" \
+ * -H "Authorization: Bearer sk-2*********************************a" \
  * -d '{"model": "text-davinci-003", "prompt": "使用golang实现冒泡排序算法", "temperature": 0, "max_tokens": 1000}'
  *
  * Authentication 验证
@@ -102,34 +120,43 @@ import com.google.gson.Gson
  * 现在你已经生成了你的第一个完成。如果您连接提示和完成文本（如果您将 echo 参数设置为 true ，API 将为您执行此操作），则生成的文本为“Say this is a test. This indeed a test.”您还可以将 API 的 stream 参数设置为 true 以流回文本（作为仅数据服务器发送的事件）。
  */
 
+val API = "https://api.openai.com/v1/completions"
+val OPENAI_API_KEY_ENV_NAME = "OPENAI_API_KEY"
+
 object ChatGPTUtil {
 
-    val API = "https://api.openai.com/v1/completions"
-
-    // 查询 API_KEY 余额： https://chat.kejicode.cn/
-
-    // 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
-    // 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
-    // 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
-
-     val OPEN_API_KEY = "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" // 确保将 YOUR_API_KEY 替换为您的 API 密钥。
-    // val OPEN_API_KEY = System.getenv("OPEN_API_KEY") // 确保将 OPEN_API_KEY 替换为您的 API 密钥,并设置到系统环境变量中。
-
     fun GetAIXCode(prompt: String): String {
+
+        /**
+         * API keys： https://platform.openai.com/account/api-keys
+         *
+         * Your secret API keys are listed below.
+         * Please note that we do not display your secret API keys again after you generate them.
+         *
+         * Do not share your API key with others, or expose it in the browser or other client-side code.
+         * In order to protect the security of your account,
+         * OpenAI may also automatically rotate any API key that we've found has leaked publicly.
+         */
+
+        val OPENAI_API_KEY = System.getenv(OPENAI_API_KEY_ENV_NAME) // 确保将 OPENAI_API_KEY 替换为您的 API 密钥,并设置到系统环境变量中。
+
         var res = ""
 
         // -d 请求入参
         val data = mutableMapOf<String, Any>()
         data["model"] = "text-davinci-003"
         data["prompt"] = prompt
-        data["temperature"] = 0
-        data["max_tokens"] = 1000
+        data["temperature"] = 0.7
+        data["max_tokens"] = 520
+        data["top_p"] = 1
+        data["frequency_penalty"] = 0
+        data["presence_penalty"] = 0
 
-        println("OPEN_API_KEY=$OPEN_API_KEY")
+        println("OPENAI_API_KEY=$OPENAI_API_KEY")
 
         val (_, _, result) = API.httpPost()
             .appendHeader("Content-Type", "application/json")
-            .appendHeader("Authorization", "Bearer $OPEN_API_KEY")
+            .appendHeader("Authorization", "Bearer $OPENAI_API_KEY")
             .timeout(60 * 1000)
             .jsonBody(Gson().toJson(data).toString())
             .timeout(60 * 1000)
@@ -187,8 +214,9 @@ ${text}
 }
 
 fun main() {
-    val aixcode = ChatGPTUtil.GetAIXCode("用 golang 实现bubble sort")
-    println("aixcode=${aixcode}")
+//    val aixcode = ChatGPTUtil.GetAIXCode("用 golang 实现bubble sort")
+//    println("aixcode=${aixcode}")
 
-//    println(System.getenv("OPEN_API_KEY"))
+    val OPENAI_API_KEY = System.getenv(OPENAI_API_KEY_ENV_NAME)
+    println(OPENAI_API_KEY)
 }
