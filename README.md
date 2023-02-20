@@ -14,6 +14,9 @@
 
 <!-- E -->
 
+## Open AI OPENAI_API_KEY 配置说明
+确保将 OPENAI_API_KEY 替换为您的 API 密钥,并在本机目录下面创建一个文件名为："OPENAI_API_KEY" 的文件，文件内容是你的 API_KEY.
+
 
 ## FAQ
 
