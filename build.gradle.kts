@@ -30,6 +30,25 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("com.github.kittinunf.fuel:fuel-gson:2.3.1")
     implementation("com.google.code.gson:gson:2.8.6")
+
+    implementation("org.apache.httpcomponents:httpclient:4.5")
+    implementation("org.apache.httpcomponents:httpmime:4.5")
+    implementation("org.apache.httpcomponents:httpcore:4.4.1")
+
+    implementation("org.apache.commons:commons-lang3:3.7")
+    implementation("org.apache.directory.studio:org.apache.commons.codec:1.8")
+    implementation("commons-io:commons-io:2.11.0")
+    implementation("org.projectlombok:lombok:1.18.12")
+    implementation("org.slf4j:slf4j-api:1.8.0-beta2")
+    implementation("com.alibaba:fastjson:1.2.78")
+    implementation("com.google.guava:guava:21.0")
+    implementation("org.projectlombok:lombok:1.18.10")
+    implementation("org.apache.commons:commons-collections4:4.4")
+    implementation("cn.hutool:hutool-all:5.2.0")
+    implementation("com.squareup.okhttp3:okhttp:4.2.0")
+    implementation("com.squareup.okhttp3:okhttp-sse:4.2.0")
+
+
 }
 
 // Configure gradle-intellij-plugin plugin.
@@ -40,12 +59,12 @@ intellij {
     type.set(properties("platformType"))
     downloadSources.set(properties("platformDownloadSources").toBoolean())
     updateSinceUntilBuild.set(true)
-// 运行平台
-//    localPath = customIdeDir
-//    localSourcesPath = customIdeDir
+    // 运行平台
+    //    localPath = customIdeDir
+    //    localSourcesPath = customIdeDir
 
-//  Plugin Dependencies:
-//  https://www.jetbrains.org/intellij/sdk/docs/basics/plugin_structure/plugin_dependencies.html
+    //  Plugin Dependencies:
+    //  https://www.jetbrains.org/intellij/sdk/docs/basics/plugin_structure/plugin_dependencies.html
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
 }
@@ -76,7 +95,7 @@ tasks {
         pluginDescription.set(
             markdownToHTML(
                 """
-<h3>aiXCoder</h3>
+<h3>Note AI</h3>
 """
             )
         )
