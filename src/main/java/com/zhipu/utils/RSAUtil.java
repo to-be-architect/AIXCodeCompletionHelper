@@ -1,6 +1,5 @@
 package com.zhipu.utils;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -8,7 +7,6 @@ import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
 
-@Slf4j
 public class RSAUtil {
 
     /**
@@ -27,7 +25,7 @@ public class RSAUtil {
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             return Base64.encodeBase64String(cipher.doFinal(data.getBytes("utf-8")));
         } catch (Exception e) {
-            log.error("加密异常", e);
+            System.out.println(e);
             return null;
         }
     }

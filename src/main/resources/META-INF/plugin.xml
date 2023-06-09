@@ -32,10 +32,20 @@
     </extensions>
 
     <actions>
-        <action id="com.github.aixcode.action.AIXCodeGenerateAction" class="com.github.aixcode.action.AIXCodeGenerateAction"
-                text="AIXCodeGenerate" description="AIXCodeGenerate">
+
+        <action id="com.github.aixcode.action.ChatGPT" class="com.github.aixcode.action.ChatGPT"
+                text="ChatGPT" description="ChatGPT">
             <keyboard-shortcut first-keystroke="ctrl alt G" keymap="$default"/>
             <add-to-group group-id="GenerateGroup" anchor="last"/>
         </action>
+
+        <action id="com.github.aixcode.action.ChatGLM" class="com.github.aixcode.action.ChatGLM"
+                text="ChatGLM" description="ChatGLM">
+            <keyboard-shortcut first-keystroke="ctrl alt M" keymap="$default"/>
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+
+
     </actions>
+
 </idea-plugin>

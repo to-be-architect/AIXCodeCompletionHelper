@@ -1,6 +1,5 @@
 package com.zhipu.utils;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-@Slf4j
 public class HttpUtilClient {
 
     private static final Integer TIME_OUT = 60000;
@@ -76,7 +74,6 @@ public class HttpUtilClient {
     }
 
     public static String sendPostJson(String url, String json, Map<String, String> header) throws Exception {
-        log.info("请求地址 url={}, request={}", url, json);
         HttpPost httpPost = null;
         String body = "";
         try {

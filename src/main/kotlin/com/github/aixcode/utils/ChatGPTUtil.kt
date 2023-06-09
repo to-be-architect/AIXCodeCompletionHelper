@@ -131,7 +131,7 @@ val OPENAI_API_KEY = File("${System.getProperty("user.home")}/OPENAI_API_KEY")
 
 object ChatGPTUtil {
 
-    fun GetAIXCode(prompt: String): String {
+    fun get(prompt: String): String {
 
         /**
          * API keys： https://platform.openai.com/account/api-keys
@@ -361,6 +361,6 @@ fun replaceNewLineAndTab(text: String): String {
 
 fun main() {
     println(OPENAI_API_KEY)
-    val aixcode = ChatGPTUtil.GetAIXCode("用 golang 实现bubble sort")
+    val aixcode = ChatGPTUtil.get("用 golang 实现bubble sort")
     println("aixcode=${aixcode}")
 }
