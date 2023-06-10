@@ -22,7 +22,7 @@ class ChatGLM : AnAction("ChatGLM") {
                     // 这地方可以定制：加一些内置语言的文本:golang
                     val prompt = "${selectedText}"
 
-                    val code = ChatGLMUtil.get(prompt)
+                    val code = ChatGLMUtil.get_local(prompt)
 
                     WriteCommandAction.runWriteCommandAction(
                         psiFile.project, "ChatGLM", "empty",
