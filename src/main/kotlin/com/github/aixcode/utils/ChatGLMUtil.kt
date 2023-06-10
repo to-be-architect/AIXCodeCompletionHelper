@@ -10,7 +10,7 @@ import java.io.File
 
 fun main(args: Array<String>) {
     val title = "大型语言模型的实现技术原理与应用"
-    ChatGLMUtil.get_local(title)
+    ChatGLMUtil.WriteBlog(title)
 }
 
 val CHATGLM_LOCAL_API = "http://127.0.0.1:8000"
@@ -81,7 +81,7 @@ object ChatGLMUtil {
             val paramsMap: HashMap<String, Any> = hashMapOf<String, Any>()
             paramsMap["top_p"] = 0.7
             paramsMap["temperature"] = 0.95
-            paramsMap["prompt"] = buildPrompt(prompt)
+            paramsMap["prompt"] = buildBlogPrompt(prompt)
             paramsMap["history"] = arrayOf<String>()
             paramsMap["requestTaskNo"] = requestTaskNo
             val resultMap = WuDaoUtils.executeEngine(MODEL_REQUEST_URL, authToken, paramsMap)
@@ -105,9 +105,9 @@ object ChatGLMUtil {
         return ""
     }
 
-    fun get_local(prompt: String): String {
+    fun WriteBlog(prompt: String): String {
         val data = mutableMapOf<String, Any>()
-        data["prompt"] = buildPrompt(prompt)
+        data["prompt"] = buildBlogPrompt(prompt)
         data["temperature"] = 0.95
         data["max_tokens"] = 8192
         data["top_p"] = 0.9
@@ -122,10 +122,32 @@ object ChatGLMUtil {
 
         val res = result.get()
 
-        return ParseChatGLMResponse(res)
+        return ParseChatGLMResponse(res, true)
     }
 
-    private fun ParseChatGLMResponse(res: String): String {
+
+    fun Complete(prompt: String): String {
+        val data = mutableMapOf<String, Any>()
+        data["prompt"] = buildLongerPrompt(prompt)
+        data["temperature"] = 0.95
+        data["max_tokens"] = 8192
+        data["top_p"] = 0.9
+
+        val (_, _, result) = CHATGLM_LOCAL_API.httpPost()
+            .appendHeader("Content-Type", "application/json")
+            .timeout(600 * 1000)
+            .jsonBody(Gson().toJson(data).toString())
+            .timeout(600 * 1000)
+            .timeoutRead(600 * 1000)
+            .responseString()
+
+        val res = result.get()
+
+        return ParseChatGLMResponse(res, false)
+    }
+
+
+    private fun ParseChatGLMResponse(res: String, needToc: Boolean): String {
 
         val gson = Gson()
         val GLMResponse = gson.fromJson(res, GLMResponse::class.java)
@@ -136,12 +158,21 @@ object ChatGLMUtil {
 
             text = replaceNewLineAndTab(text)
 
-            return """
-[toc]                      
+            val tocText =
+                """
+[toc]                    
                 
-${text}  
+                
+${text}
 
 """
+
+            val completeText = text
+
+            return if (needToc)
+                tocText
+            else completeText
+
         } else {
             return "\n"
         }
@@ -155,7 +186,7 @@ ${text}
         var time: String = "2023-06-11 00:55:14"
     }
 
-    private fun buildPrompt(prompt: String): String {
+    private fun buildBlogPrompt(prompt: String): String {
         val InputPrompt = """
          你是一位人工智能专家,程序员,软件架构师,CTO，请以《${prompt}》为标题，写一篇有深度有思考有见解的专业的技术博客文章， 字数要求不少于5000字。文章目录如下：
 
@@ -198,6 +229,18 @@ ${text}
 
 请保持逻辑清晰、结构紧凑，以便读者更容易理解和掌握所讲述的技术知识。
              
+         """.trimIndent()
+
+        println(InputPrompt)
+
+        return InputPrompt
+    }
+
+
+    private fun buildLongerPrompt(prompt: String): String {
+        val InputPrompt = """
+         你是一位人工智能专家,程序员,软件架构师,CTO，请以逻辑清晰、结构紧凑、简单易懂的专业的技术语言，并且不少于1000字的内容，续写以下内容：
+         ${prompt}
          """.trimIndent()
 
         println(InputPrompt)

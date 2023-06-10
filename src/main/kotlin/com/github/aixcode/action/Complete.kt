@@ -8,7 +8,7 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiFile
 
-class ChatGLM : AnAction("ChatGLM") {
+class Complete : AnAction("Complete") {
 
     override fun actionPerformed(event: AnActionEvent) {
         val psiFile: PsiFile? = event.getData(LangDataKeys.PSI_FILE)
@@ -22,10 +22,10 @@ class ChatGLM : AnAction("ChatGLM") {
                     // 这地方可以定制：加一些内置语言的文本:golang
                     val prompt = "${selectedText}"
 
-                    val code = ChatGLMUtil.get_local(prompt)
+                    val code = ChatGLMUtil.Complete(prompt)
 
                     WriteCommandAction.runWriteCommandAction(
-                        psiFile.project, "ChatGLM", "empty",
+                        psiFile.project, "Complete", "empty",
                         {
                             editor.document.insertString(editor.selectionModel.selectionEnd, code)
                         },
@@ -34,7 +34,7 @@ class ChatGLM : AnAction("ChatGLM") {
 
                 }
             } catch (e: Exception) {
-                println("ChatGLM code gen failed:$e")
+                println("Complete failed:$e")
             }
         } else {
             println("psiFile is null")

@@ -39,9 +39,15 @@
             <add-to-group group-id="GenerateGroup" anchor="last"/>
         </action>
 
-        <action id="com.github.aixcode.action.ChatGLM" class="com.github.aixcode.action.ChatGLM"
-                text="ChatGLM" description="ChatGLM">
+        <action id="com.github.aixcode.action.WriteBlog" class="com.github.aixcode.action.WriteBlog"
+                text="WriteBlog" description="WriteBlog">
             <keyboard-shortcut first-keystroke="ctrl alt M" keymap="$default"/>
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+
+        <action id="com.github.aixcode.action.Complete" class="com.github.aixcode.action.Complete"
+                text="Complete" description="Complete">
+            <keyboard-shortcut first-keystroke="ctrl alt L" keymap="$default"/>
             <add-to-group group-id="GenerateGroup" anchor="last"/>
         </action>
 
