@@ -4,8 +4,12 @@
     <vendor url="https://github.com/Jason-Chen-2017" email="chenguangjian2019@gmail.com">禅与计算机程序设计艺术</vendor>
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
+
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
+
+    <depends>com.intellij.modules.python</depends>
+    <depends>com.intellij.modules.web</depends>
     <!--各平台依赖-->
     <depends optional="true" config-file="platforms/kotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="platforms/clion.xml">com.intellij.modules.clion</depends>
